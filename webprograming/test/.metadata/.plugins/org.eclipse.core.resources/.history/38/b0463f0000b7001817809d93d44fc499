@@ -1,0 +1,18 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>147p 예제</title>
+</head>
+<body>
+성별: <input type="radio" name="mf" value = "male"/> 맨
+	<input type="radio" name ="mf" value = "female"/> 워먼
+	<br><br>
+식성: <input type="radio" name="a" value ="gogi"/> 고기
+	<input type="radio" name="a" value ="chaso"/> 채소only
+	<input type="radio" name="a" value ="anything"/> 뭐든
+
+</body>
+</html>

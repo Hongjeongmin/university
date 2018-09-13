@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>화면1</title>
+</head>
+<body>
+<h2>선택하세요</h2><p><p>
+
+1.<a href="b.html">대기업</a><p>
+2.<a href="c.html">공무원</a><p>
+</html>

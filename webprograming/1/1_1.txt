@@ -1,0 +1,12 @@
+<!doctype html>
+<!-- 나는 주석입니다 -->
+<html>
+    <head>
+        <meta chareset="EUC-KR">
+        <title>내가 CEO다~</title>
+    </head>
+    <body>
+     James 주식  회사
+     <!-- 회사명은 마음대로 정하세요~ -->
+    </body>
+    </html>

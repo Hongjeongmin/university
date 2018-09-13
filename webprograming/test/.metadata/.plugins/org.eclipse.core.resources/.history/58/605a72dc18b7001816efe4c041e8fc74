@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>대기업</title>
+</head>
+<body style="background-color:silver">
+	<h2><b>입사 원하는 2 기업을 입력하세요</b></h2><p>
+	
+	1순위:<input type="text" name="one"/><br>
+	2순위:<input type="text" name="two"/><p>
+<input type="submit" value="확인"/>
+</body>
+</html>

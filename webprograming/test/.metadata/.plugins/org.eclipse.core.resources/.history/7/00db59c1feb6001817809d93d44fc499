@@ -1,0 +1,23 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<%!
+		int one;
+		int tow =1;
+		public int plusMethod(){
+			return one + two;
+		}
+		String msg;
+		int three;
+	%>
+	<%
+		out.print("one 와 tow의 합은 ?"+  this.plusMethod());
+	%>
+</body>
+</html>
