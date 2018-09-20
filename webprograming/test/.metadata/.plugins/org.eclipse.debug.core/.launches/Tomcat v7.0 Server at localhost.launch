@@ -8,6 +8,6 @@
     <booleanAttribute key="org.eclipse.jdt.launching.DEFAULT_CLASSPATH" value="false"/>
     <stringAttribute key="org.eclipse.jdt.launching.JRE_CONTAINER" value="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jre-10.0.2"/>
     <stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="start"/>
-    <stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Dcatalina.base=&quot;D:\3-2\webprograming\test\.metadata\.plugins\org.eclipse.wst.server.core\tmp0&quot; -Dcatalina.home=&quot;C:\Program Files\Apache Software Foundation\Tomcat 7.0&quot; -Dwtp.deploy=&quot;D:\3-2\webprograming\test\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps&quot;"/>
+    <stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Dcatalina.base=&quot;D:\university\webprograming\test\.metadata\.plugins\org.eclipse.wst.server.core\tmp0&quot; -Dcatalina.home=&quot;C:\Program Files\Apache Software Foundation\Tomcat 7.0&quot; -Dwtp.deploy=&quot;D:\university\webprograming\test\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps&quot;"/>
     <stringAttribute key="server-id" value="Tomcat v7.0 Server at localhost"/>
 </launchConfiguration>
