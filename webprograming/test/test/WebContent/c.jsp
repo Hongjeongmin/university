@@ -7,11 +7,17 @@
 <title>Insert title here</title>
 </head>
 <body>
-<% request.setCharacterEncoding("UTF-8"); %>
-<h3>고객님께서는</h3><br>
-<%=request.getParameter("br") %> 과 <p>
-<% request.setCharacterEncoding("UTF-8"); %>
-<%=request.getParameter("dr") %> 을 <p>
-드시고 싶으신가 보군요!
+<%
+	request.setCharacterEncoding("UTF-8");
+	String car = request.getParameter("car");
+	session.setAttribute("car",car);
+	session.setMaxInactiveInterval(60*60);
+%>
+<h3>좋아하는 쇼미더머니 대사</h3>
+<form method="post" action="find.jsp">
+	<input type="text" name="comment"><p>
+	<input type="submit" value="제출">
+</form>
+
 </body>
 </html>

@@ -7,16 +7,24 @@
 <title>Insert title here</title>
 </head>
 <body>
-<% request.setCharacterEncoding("UTF-8"); %>
-<h2>고객님이 좋아하시는 음료가 무엇인가요?</h2><p>
+<%
+	request.setCharacterEncoding("UTF-8");
+	String dr = request.getParameter("dr");
+	session.setAttribute("dr",dr);
+	session.setMaxInactiveInterval(60*60);
+%>
+<h3>좋아하는 자동차가 뭐야??</h3>
 <form method="post" action="c.jsp">
-<input type="radio" name="dr" value="술"/>술<br>
-<input type="radio" name="dr" value="콜라"/>콜라<br>
-<input type="radio" name="dr" value="사이다"/>사이다<br>
-<input type="radio" name="dr" value="맘스터치"/>맘스터치<br>
-<p>
-<input type="hidden" name="br" value="<%= request.getParameter("br") %>"/>
-<input type="submit" value="완료"/>
+	<select name="car">
+		<option value="람보르기니">람보르기니</option>
+		<option value="마티즈">마티즈</option>
+		<option value="스파크">스파크</option>
+		<option value="K3">K3</option>
+		<option value="K9">K9</option>
+		<option value="아우디">아우디</option>
+		<option value="벤츠">벤츠</option>
+	</select>
+	<input type="submit" value="다음"/>
 </form>
 </body>
 </html>

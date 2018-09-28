@@ -715,3 +715,24 @@
 9월 17, 2018 09:51:43.80 [18888:15708:0917/095143.786:ERROR:in_progress_cache_impl.cc(191)] Cache is not initialized, cannot RetrieveEntry.
 9월 17, 2018 09:51:54.37 
 9월 17, 2018 09:51:54.37 KLIB_SelfTest return : KLR_OK
+
+9월 27, 2018 12:22:19.55 NEW SESSION
+9월 27, 2018 12:22:19.55 [7108:17324:0927/122219.526:ERROR:connection_factory_impl.cc(396)] Failed to connect to MCS endpoint with error -118
+9월 27, 2018 12:23:10.14 [7108:17324:0927/122310.146:ERROR:connection_factory_impl.cc(396)] Failed to connect to MCS endpoint with error -118
+9월 27, 2018 12:27:25.44 [7108:17324:0927/122725.444:ERROR:service_manager_context.cc(270)] Attempting to run unsupported native service: C:\Program Files (x86)\Google\Chrome\Application\69.0.3497.100\content_browser.service.exe
+9월 27, 2018 12:27:25.44 [7108:17324:0927/122725.445:ERROR:service_manager_context.cc(270)] Attempting to run unsupported native service: C:\Program Files (x86)\Google\Chrome\Application\69.0.3497.100\content_browser.service.exe
+9월 27, 2018 12:27:25.44 [7108:17324:0927/122725.445:ERROR:service_manager_context.cc(270)] Attempting to run unsupported native service: C:\Program Files (x86)\Google\Chrome\Application\69.0.3497.100\content_browser.service.exe
+9월 27, 2018 12:27:25.44 [7108:17324:0927/122725.445:ERROR:service_manager_context.cc(270)] Attempting to run unsupported native service: C:\Program Files (x86)\Google\Chrome\Application\69.0.3497.100\content_browser.service.exe
+9월 27, 2018 12:27:25.44 [7108:17324:0927/122725.445:ERROR:service_manager_context.cc(270)] Attempting to run unsupported native service: C:\Program Files (x86)\Google\Chrome\Application\69.0.3497.100\content_browser.service.exe
+9월 27, 2018 12:27:25.44 [7108:17324:0927/122725.445:ERROR:service_manager_context.cc(270)] Attempting to run unsupported native service: C:\Program Files (x86)\Google\Chrome\Application\69.0.3497.100\content_browser.service.exe
+9월 27, 2018 12:27:25.45 [7108:17324:0927/122725.445:ERROR:service_manager_context.cc(270)] Attempting to run unsupported native service: C:\Program Files (x86)\Google\Chrome\Application\69.0.3497.100\content_browser.service.exe
+9월 27, 2018 12:27:25.45 [7108:17324:0927/122725.445:ERROR:service_manager_context.cc(270)] Attempting to run unsupported native service: C:\Program Files (x86)\Google\Chrome\Application\69.0.3497.100\content_browser.service.exe
+9월 27, 2018 12:27:25.45 [7108:17324:0927/122725.447:ERROR:service_manager_context.cc(270)] Attempting to run unsupported native service: C:\Program Files (x86)\Google\Chrome\Application\69.0.3497.100\content_browser.service.exe
+9월 27, 2018 12:27:25.45 [7108:17324:0927/122725.447:ERROR:service_manager_context.cc(270)] Attempting to run unsupported native service: C:\Program Files (x86)\Google\Chrome\Application\69.0.3497.100\content_browser.service.exe
+9월 27, 2018 12:27:25.45 [7108:17324:0927/122725.447:ERROR:service_manager_context.cc(270)] Attempting to run unsupported native service: C:\Program Files (x86)\Google\Chrome\Application\69.0.3497.100\content_browser.service.exe
+9월 27, 2018 12:27:25.45 [7108:17324:0927/122725.447:ERROR:service_manager_context.cc(270)] Attempting to run unsupported native service: C:\Program Files (x86)\Google\Chrome\Application\69.0.3497.100\content_browser.service.exe
+9월 27, 2018 12:27:25.45 [7108:17324:0927/122725.447:ERROR:service_manager_context.cc(270)] Attempting to run unsupported native service: C:\Program Files (x86)\Google\Chrome\Application\69.0.3497.100\content_browser.service.exe
+9월 27, 2018 12:27:25.45 [7108:17324:0927/122725.447:ERROR:service_manager_context.cc(270)] Attempting to run unsupported native service: C:\Program Files (x86)\Google\Chrome\Application\69.0.3497.100\content_browser.service.exe
+9월 27, 2018 12:27:25.45 [7108:17324:0927/122725.448:ERROR:service_manager_context.cc(270)] Attempting to run unsupported native service: C:\Program Files (x86)\Google\Chrome\Application\69.0.3497.100\content_browser.service.exe
+9월 27, 2018 12:27:25.50 
+9월 27, 2018 12:27:25.50 KLIB_SelfTest return : KLR_OK
