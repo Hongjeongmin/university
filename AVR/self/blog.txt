@@ -1,0 +1,5 @@
+AVR = Alf(Bogen) Vergard(Wollen) Risc
+
+DDRA = 0xFF;  A포트의 모든 전원을 출력으로 하겠다.
+DDRA = 0x00;  A포트의 모든 전원을 입력으로 하겠다.
+
