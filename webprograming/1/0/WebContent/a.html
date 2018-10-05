@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h3>설문조사</h3>
+<form method="post" action="b.jsp">
+	<fieldset>
+		<legend>성별과 나이를 입력하세요.</legend>
+			성별: <input type="radio" name="gender" value="남" checked/>남성
+				<input type="radio" name="gender" value="여"/>여성<br>
+			나이:<input type="text" name="age"/>
+	</fieldset><p>
+	<fieldset>
+		<legend>관심있는 식문화를 선택하세요.(1개 이상)</legend>
+			<input type="checkbox" name="foods" value="진,워커,소주"/>진,워커,소주
+			<input type="checkbox" name="foods" value="치맥"/>치맥
+			<input type="checkbox" name="foods" value="삼겹살"/>삼겹살
+			<input type="checkbox" name="foods" value="스테이크"/>스테이크
+	</fieldset><p>
+	<fieldset>
+		<legend>나의 자신감은 어느 정도이간?</legend>
+		나는 무지 잘 생겼다. 1<input type="range" name="a"min="1" max="5" value="3"/>5<br>
+		나는 맘만 먹으면 A+때리는 건 암것도 아니다. 1<input type="range" name="b" min="1" max="5" value="3"/>5<br>
+		내가 수업시간에 딴짓하는 것 같아도 머리로는 다 안다. 1<input type="range" name="c" min="1" max="5" value="3"/>5
+	</fieldset>
+	기타 의견 사항<br>
+		<textarea name="comments" rows="5" cols="40">의견을 적으세요</textarea>
+<p>
+<input type="submit" value="확인"/>
+<input type="reset" value="취소"/>
+</form>
+</body>
+</html>
