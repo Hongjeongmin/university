@@ -143,7 +143,7 @@ int main(void)
 			{
 				for(int w=0;w<100;w++ )
 				{
-					path[q][w].x = 0;	
+					path[q][w].x=0;
 				}	
 			}	
 		}
