@@ -14,7 +14,8 @@ class Path
 };
 
 Path path[100][100];
-
+Path dp[100][100];
+//////////////////DP 추가 오버플로우 처리 how 경로출력? 
 Path Route(int m,int n,int k,int k_count)//초기화 된값이라고 과정 
 {										// k_count 초기값은 path[m-1][n-1].x; 값 
 	//cout<<"시작"<<endl;
