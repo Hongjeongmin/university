@@ -1,0 +1,37 @@
+create table member(
+name varchar2(10),
+userid varchar2(10),
+pwd varchar2(10),
+email varchar2(20),
+phone char(13),
+admin number(1) default 0,
+primary key(userid)
+);
+
+insert into member values
+	('ÀÌ¼Ò¹Ì','somi','1234', 'gmd@naver.com', '010-2362-5157',0);
+insert into member values
+	('ÇÏ»ó¿À','sang12','1234', 'ha12@naver.com','010-5629-8888',0);
+insert into member values
+	('±èÀ±½Â', 'light','1234', 'yoon1004@naver.com','010-9999-8282',0);
+
+
+create table test_(
+id varchar2(10) not null,
+pw varchar2(10) not null,
+grade number(1) default 0,
+primary key(id)
+);
+
+insert into test_ values
+	('Á¤¹Î','hello',2);
+insert into test_ values
+	('¸í¼ö','hello',1);
+insert into test_ values
+	('¹®¼ö','hell',2);
+
+update test_ set pw='hell' where id='Á¤¹Î';
+
+delete test_;
+
+drop table test_;

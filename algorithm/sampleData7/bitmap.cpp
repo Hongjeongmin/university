@@ -46,6 +46,7 @@ int main(void)
 			fin>>n;
 			fin>>m;
 			fout<<"B"<<" "<<n<<" "<<m<<endl;
+			cout << "B";
 			char **arr = new char*[n];
 			for(int i=0;i<n;i++)
 			{
