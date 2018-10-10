@@ -19,37 +19,42 @@ Path dp[100][100];
 Path Route(int m,int n,int k,int k_count)//초기화 된값이라고 과정 
 {										// k_count 초기값은 path[m-1][n-1].x; 값 
 	//cout<<"시작"<<endl;
-	Path route_m;
-	Path route_u;
+	Path &ref = dp[m][n];
+	if(ref.weight != 0 || ref.x == 500)
+	{
+		return ref;
+	}
+
 	k_count += path[m][n].x;
 	
 	if(k_count > k)
 	{
-		route_m.x=500;
-		return 	route_m;
+		//route_m.x=500;
+		ref.x = 500;
+		return 	ref;
 	} 
 	if(m==0 && n==0)
 	{
 		//끝노드도착~ 
-		route_m.x = path[0][0].x;
-		route_m.weight=0;
-		return route_m;
+		ref.x = path[0][0].x;
+		ref.weight=0;
+		return ref;
 	}
 	else if(m==0 && n!=0)
 	{
 	//	cout<<"m!= && n==0"<<endl;
 		//맨꼭대기에서 왼쪽으로만 가는경우~ 
-		route_m = Route(m,n-1,k,k_count);
-		if(route_m.x == k-k_count)
+		ref = Route(m,n-1,k,k_count);
+		if(ref.x == k-k_count)
 		{
-			route_m.weight += path[m][n-1].w_r;
-			route_m.x += path[m][n].x;
-			return route_m; 
+			ref.weight += path[m][n-1].w_r;
+			ref.x += path[m][n].x;
+			return ref; 
 		}
 		else
 		{
-			route_m.x =500;
-			return route_m;
+			ref.x =500;
+			return ref;
 		}
 		
 	}
@@ -57,22 +62,24 @@ Path Route(int m,int n,int k,int k_count)//초기화 된값이라고 과정
 	{
 	//	cout<<"m==0 && n!=0"<<endl;
 		//맨왼쪽에서 위쪽으로만 가는경우~
-		route_u = Route(m-1,n,k,k_count);
-		if(route_u.x == k-k_count)
+		ref = Route(m-1,n,k,k_count);
+		if(ref.x == k-k_count)
 		{
-			route_u.weight += path[m-1][n].w_b;
-			route_u.x += path[m][n].x;
-			return route_u;		
+			ref.weight += path[m-1][n].w_b;
+			ref.x += path[m][n].x;
+			return ref;		
 		}
 		else
 		{
-			route_u.x =500;
-			return route_u;
+			ref.x =500;
+			return ref;
 		}
 	}
 	else
 	{
 		//그외~  k-k_count 내가 받아야할값 
+		Path route_m;
+		Path route_u;
 		route_m = Route(m,n-1,k,k_count);
 		route_u = Route(m-1,n,k,k_count);
  
@@ -87,16 +94,18 @@ Path Route(int m,int n,int k,int k_count)//초기화 된값이라고 과정
 				//경로는 위에 꺼를 가져오거 weight와 x값 수정해서 리턴 
 				route_u.weight += path[m-1][n].w_b;
 				route_u.x += path[m][n].x;
-				route_u.route = (route_u.route%100000 + route_m.route%100000)%100000;
-				return route_u; 
+				route_u.route += route_m.route;
+				ref = route_u;
+				return ref;
 			}
 			else
 			{
 				// 왼쪽에서 온게 가중치가 작을경우
 				 route_m.weight += path[m][n-1].w_r;
 				 route_m.x += path[m][n].x;
-				 route_m.route = (route_m.route%100000 + route_u.route%100000)%100000;
-				 return route_m;
+				 route_m.route += route_u.route;
+				 ref = route_m;
+				 return ref;
 			}
 		}
 		else if(route_m.x== k-k_count)
@@ -104,20 +113,23 @@ Path Route(int m,int n,int k,int k_count)//초기화 된값이라고 과정
 			//왼쪽에서 오는놈 경로채택 
 			 route_m.weight += path[m][n-1].w_r;
 			 route_m.x += path[m][n].x;
-			 return route_m;			
+			 ref = route_m;
+			 return ref;			
 		} 
 		else if(route_u.x==k-k_count)
 		{
 			//위쪽에서 오는놈 경로채택
 			route_u.weight += path[m-1][n].w_b;
 			route_u.x += path[m][n].x;
-			return route_u;			 
+			ref = route_u;
+			return ref;			 
 		}
 		else
 		{
 			//둘다채택하지않음
-			route_u.x =500;
-			return route_u; 
+		//	route_u.x =500;
+			ref.x=500;
+			return ref; 
 		} 
 	}
 }
@@ -175,6 +187,18 @@ int main(void)
 		cout<<"Test Case No:"<<i+1<<endl;
 		for(int j=0;j<=K;j++)
 		{	
+			if(j!=0)
+			{
+				for(int q=0;q<100;q++)
+				{
+					for(int w=0;w<100;w++)
+					{
+						dp[q][w].weight=0;	
+						dp[q][w].x=0;/////////////////////////////////			
+					}
+					
+				}
+			}
 			result = Route(M-1,N-1,j,0);
  
 			if(result.x != 500)//경로가없을시 보이지않는다. 
