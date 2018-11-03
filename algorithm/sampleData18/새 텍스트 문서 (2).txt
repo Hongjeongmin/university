@@ -1,0 +1,49 @@
+			if(i<M-1&&j==0)
+			{
+				for(int q=0;q<=path[i][j].k;q++)
+				{	
+					dp[i+1][j][q + path[i+1][j].x].weight = dp[i][j][q].weight + path[i][j].w_b;
+					dp[i+1][j][q + path[i+1][j].x].str = dp[i][j][q].str.append("D");			
+				}
+
+			}
+			else if(i<M-1)
+			
+			if(j<N-1&& i!=0)
+			{		
+				for(int q=0;q<=path[i][j].k;q++)
+				{
+					if(dp[i][j+1][q + path[i][j+1].x].weight > dp[i][j][q].weight + path[i][j].w_r )
+					{
+						dp[i][j+1][q + path[i][j+1].x].weight = dp[i][j][q].weight + path[i][j].w_r;
+						dp[i][j+1][q + path[i][j+1].x].str = dp[i][j][q].str.append("R");
+					}
+					else if(dp[i][j+1][q + path[i][j+1].x].weight == dp[i][j][q].weight + path[i][j].w_r )
+					{
+						for(int w=0;;w++)
+						{
+							if(dp[i][j+1][q + path[i][j+1].x].str[w] != dp[i][j][q].str[w])
+							{
+								if(dp[i][j][q].str[w] == 'D')
+								{
+									dp[i][j][q + path[i+1][j].x].str = dp[i][j][q].str.append("R");
+									break;
+								}
+								else
+								{
+									break;
+								}
+								
+							}
+						}
+					}
+				}					
+			}
+			else if(j<N-1&& i==0)
+			{
+				for(int q=0;q<=path[i][j].k;q++)
+				{
+					dp[i][j+1][q+path[i][j+1].x].weight = dp[i][j][q].weight + path[i][j].w_r;
+					dp[i][j+1][q+path[i][j+1].x].str = dp[i][j][q].str.append("R");
+				}
+			}	

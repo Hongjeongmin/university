@@ -2,6 +2,7 @@
 #include<fstream>
 #include<string>
 using namespace std;
+const int INF = 300012342;
 //int k_count;
 class Path
 {
@@ -9,122 +10,76 @@ class Path
 		int w_r;
 		int w_b;
 		int x=0;// 1 is x sign
+		int k=0;
+
+};
+class RR
+{
+	public:
 		int route=1;
 		int weight=0;
+		string str;
 };
-
 Path path[100][100];
-Path dp[100][100];
+RR dp[100][100][201];
 //////////////////DP 추가 오버플로우 처리 how 경로출력? 
-Path Route(int m,int n,int k,int k_count)//초기화 된값이라고 과정 
-{										// k_count 초기값은 path[m-1][n-1].x; 값 
-	//cout<<"시작"<<endl;
-	Path route_m;
-	Path route_u;
-	k_count += path[m][n].x;
-	
-	if(k_count > k)
+void gogo(int M,int N)
+{
+	for(int i=0;i<M;i++)
 	{
-		route_m.x=500;
-		return 	route_m;
-	} 
-	if(m==0 && n==0)
-	{
-		//끝노드도착~ 
-		route_m.x = path[0][0].x;
-		route_m.weight=0;
-		return route_m;
-	}
-	else if(m==0 && n!=0)
-	{
-	//	cout<<"m!= && n==0"<<endl;
-		//맨꼭대기에서 왼쪽으로만 가는경우~ 
-		route_m = Route(m,n-1,k,k_count);
-		if(route_m.x == k-k_count)
+		for(int j=0;j<N;j++)
 		{
-			route_m.weight += path[m][n-1].w_r;
-			route_m.x += path[m][n].x;
-			return route_m; 
-		}
-		else
-		{
-			route_m.x =500;
-			return route_m;
-		}
-		
-	}
-	else if(m!=0 && n==0)
-	{
-	//	cout<<"m==0 && n!=0"<<endl;
-		//맨왼쪽에서 위쪽으로만 가는경우~
-		route_u = Route(m-1,n,k,k_count);
-		if(route_u.x == k-k_count)
-		{
-			route_u.weight += path[m-1][n].w_b;
-			route_u.x += path[m][n].x;
-			return route_u;		
-		}
-		else
-		{
-			route_u.x =500;
-			return route_u;
-		}
-	}
-	else
-	{
-		//그외~  k-k_count 내가 받아야할값 
-		route_m = Route(m,n-1,k,k_count);
-		route_u = Route(m-1,n,k,k_count);
- 
-		if(route_m.x == k-k_count && route_u.x == k-k_count)
-		{
-			//두경로중 웨이트작은값 선택해서 리턴
-			//route수는 두경로에서 왓던수 더해줌~ 
-			if(route_m.weight + path[m][n-1].w_r >= route_u.weight + path[m-1][n].w_b )
+			if(i<M-1)
 			{
-				//위쪽에서 온게 가중치가 작을경우
-				//같은경우도 위에있는걸 채택 
-				//경로는 위에 꺼를 가져오거 weight와 x값 수정해서 리턴 
-				route_u.weight += path[m-1][n].w_b;
-				route_u.x += path[m][n].x;
-				route_u.route = (route_u.route%100000 + route_m.route%100000)%100000;
-				return route_u; 
+				for(int q=0;q<=path[i][j].k;q++)
+				{
+					dp[i+1][j][q + path[i+1][j].x].weight = dp[i][j][q].weight + path[i][j].w_b;
+					dp[i+1][j][q + path[i+1][j].x].str = dp[i][j][q].str;
+					dp[i+1][j][q + path[i+1][j].x].str.append("D");
+				}
 			}
-			else
+			
+			if(j<N-1 && i!=0)
 			{
-				// 왼쪽에서 온게 가중치가 작을경우
-				 route_m.weight += path[m][n-1].w_r;
-				 route_m.x += path[m][n].x;
-				 route_m.route = (route_m.route%100000 + route_u.route%100000)%100000;
-				 return route_m;
+				for(int q=0;q<=path[i][j].k;q++)
+				{
+					if(dp[i][j+1][q + path[i][j+1].x].weight > dp[i][j][q].weight + path[i][j].w_r)
+					{
+						dp[i][j+1][q + path[i][j+1].x].weight = dp[i][j][q].weight + path[i][j].w_r;
+						dp[i][j+1][q + path[i][j+1].x].str = dp[i][j][q].str;
+						dp[i][j+1][q + path[i][j+1].x].str.append("R");
+					}
+					else if(dp[i][j+1][q + path[i][j+1].x].weight == dp[i][j][q].weight + path[i][j].w_r)
+					{
+						for(int w=0;;w++)
+						{
+							if(dp[i][j][q].str[w] == 'D' && dp[i][j+1][q + path[i][j+1].x].str[w] == 'R')
+							{
+								dp[i][j+1][q + path[i][j+1].x].str = dp[i][j][q].str;
+								dp[i][j+1][q + path[i][j+1].x].str.append("R");
+								break;
+							}
+						}
+					}
+				}
+			}
+			else if(j<N-1 && i==0)
+			{
+				for(int q=0;q<=path[i][j].k;q++)
+				{
+					dp[i][j+1][q + path[i][j+1].x].weight = dp[i][j][q].weight + path[i][j].w_r;
+					dp[i][j+1][q + path[i][j+1].x].str = dp[i][j][q].str;
+					dp[i][j+1][q + path[i][j+1].x].str.append("R");
+				}				
 			}
 		}
-		else if(route_m.x== k-k_count)
-		{
-			//왼쪽에서 오는놈 경로채택 
-			 route_m.weight += path[m][n-1].w_r;
-			 route_m.x += path[m][n].x;
-			 return route_m;			
-		} 
-		else if(route_u.x==k-k_count)
-		{
-			//위쪽에서 오는놈 경로채택
-			route_u.weight += path[m-1][n].w_b;
-			route_u.x += path[m][n].x;
-			return route_u;			 
-		}
-		else
-		{
-			//둘다채택하지않음
-			route_u.x =500;
-			return route_u; 
-		} 
 	}
 }
 
 int main(void)
 {
-	Path result;
+	RR result;
+	RR count;
 	ifstream fin;
 	ofstream fout;
 	fin.open("path.inp");
@@ -135,21 +90,23 @@ int main(void)
 	int K;
 	int x,y;
 	fin>>C;
-	
+	dp[0][0][0].weight=0;
 	for(int i=0;i<C;i++)
-	{
+	{		
+		fin>>M;fin>>N;fin>>K;
+		
 		if(i!=0)
 		{
-			for(int q=0;q<100;q++)
+			for(int q=0;q<M;q++)
 			{
-				for(int w=0;w<100;w++ )
+				for(int w=0;w<N;w++ )
 				{
 					path[q][w].x=0;
+					path[q][w].k=0;	
 				}	
-			}	
+			}
 		}
 				
-		fin>>M;fin>>N;fin>>K;
 		for(int j=0;j<K;j++)
 		{
 			fin>>x;fin>>y;
@@ -169,23 +126,197 @@ int main(void)
 				fin>>path[j][z].w_b;
 			}
 		}
-
-	//	cout<<"M:"<<M<<"N:"<<N<<"K:"<<K<<endl;
-	//	fout<<"Test Case No:"<<i+1<<endl;
-		cout<<"Test Case No:"<<i+1<<endl;
-		for(int j=0;j<=K;j++)
-		{	
-			result = Route(M-1,N-1,j,0);
- 
-			if(result.x != 500)//경로가없을시 보이지않는다. 
+		//////////////////////////////////////////받기끝//// 
+		for(int a=0;a<M;a++)
+		{
+			for(int b=0;b<N;b++)
 			{
-				//F(x) k일때 카운트 cost 계산~ count수는 하위 5개자리로 처리~
-				//최소비용 cost가 동일시에는 아래 방향으로 먼저 진행하는 경로선택~				
-				cout<<"k:"<<j<<" count:"<<result.route<<" cost:"<<result.weight<<endl;
-				//fout<<"k:"<<j<<" count:"<<count<<" cost:"<<cost<<endl;
-				//cout 경로출력 (0,0) -> (0,2) -> ........ (3,6) 끝 최저비용 
+				if(a==0&&b!=0)
+				{
+				//맨위에서 왼쪽 
+					if(path[a][b-1].k > path[a][b].k )
+					{
+						path[a][b].k = path[a][b-1].k;	
+					} 
+					
+					for(int q=0;q<path[a][b].k;q++)
+					{
+						dp[a][b][q].route = 0;
+						dp[a][b][q].weight =INF;
+						dp[a][b][path[a][b].k].str="";
+					}
+					dp[a][b][path[a][b].k].route = 1;
+					dp[a][b][path[a][b].k].weight =INF;
+					dp[a][b][path[a][b].k].str="";
+					
+					//시프트 
+					if(path[a][b].x == 1)
+					{
+						dp[a][b][path[a][b].k].route = 0;					
+						dp[a][b][path[a][b].k].weight =INF;
+						dp[a][b][path[a][b].k].str="";						
+						path[a][b].k ++;
+						dp[a][b][path[a][b].k].route = 1;
+						dp[a][b][path[a][b].k].weight =INF;
+						dp[a][b][path[a][b].k].str="";
+					}
+				}
+				else if(a!=0&&b==0)
+				{
+				//맨왼쪽에서 위로 
+					if(path[a-1][b].k > path[a][b].k)
+					{
+						path[a][b].k = path[a-1][b].k;
+					}
+					for(int q=0;q<path[a][b].k;q++)
+					{
+						dp[a][b][q].route = 0;
+						dp[a][b][q].weight =INF;
+						dp[a][b][q].str="";
+					}
+					dp[a][b][path[a][b].k].route = 1;
+					dp[a][b][path[a][b].k].weight =INF;
+					dp[a][b][path[a][b].k].str="";
+					if(path[a][b].x ==1)
+					{
+						dp[a][b][path[a][b].k].route = 0;
+						dp[a][b][path[a][b].k].weight = INF;
+						dp[a][b][path[a][b].k].str="";
+						path[a][b].k ++;
+						dp[a][b][path[a][b].k].route = 1;
+						dp[a][b][path[a][b].k].weight = INF;
+						dp[a][b][path[a][b].k].str="";												
+					}					
+				}
+				else if(a==0&&b==0)continue;
+				else
+				{
+					//위 왼
+					if(path[a][b-1].k > path[a][b].k ) 
+					{
+						path[a][b].k = path[a][b-1].k;
+
+					}
+					
+					if(path[a-1][b].k > path[a][b].k)
+					{
+						path[a][b].k = path[a-1][b].k;
+					}
+					// 왼 위 중에 더큰 k값으로 간다. 
+					//dp 초기화 
+					for(int q=0;q<=path[a][b].k;q++)
+					{
+						dp[a][b][q].route = 0;
+						dp[a][b][q].weight = INF;	
+						dp[a][b][q].str="";
+					}		 
+					for(int q=0; q <= path[a-1][b].k;q++)
+					{
+						if(dp[a-1][b][q].route == 0)
+						{
+							continue;
+						}
+						else if((dp[a-1][b][q].route + dp[a][b][q].route) % 1000000 == 0)
+						{
+							dp[a][b][q].route=100000;	
+						}
+						else
+						{
+							dp[a][b][q].route = (dp[a][b][q].route + dp[a-1][b][q].route) % 1000000;
+						}				
+					}
+					for(int q=0; q <= path[a][b-1].k;q++)
+					{
+						if(dp[a][b-1][q].route == 0)
+						{
+							continue;
+						}
+						else if((dp[a][b-1][q].route + dp[a][b][q].route) % 1000000 == 0)
+						{
+							dp[a][b][q].route=100000;						
+						}
+						else
+						{
+							dp[a][b][q].route = (dp[a][b][q].route + dp[a][b-1][q].route) % 1000000;						
+						}				
+					}				
+					// 마킹되어있으면 시프트 시킨다 
+					if(path[a][b].x==1)
+					{
+						path[a][b].k++;
+						
+						dp[a][b][path[a][b].k].weight=INF;
+						dp[a][b][path[a][b].k].str="";
+						for(int q = path[a][b].k;q>0;q--)
+						{
+							dp[a][b][q].route = dp[a][b][q-1].route;
+						}
+						dp[a][b][0].str="";
+						dp[a][b][0].route=0;
+						dp[a][b][0].weight=INF;
+					}
+					//시프트완료~ 				
+				}
 			}
 		}
+/*
+			for(int w=0;w<M;w++)
+			{
+				for(int e=0;e<N;e++)
+				{
+					cout<<path[w][e].k<<" ";
+				}
+				cout<<endl;
+			}
+*/			
+		///////////////////////////cost 값 구하기
+		
+		gogo(M,N);
+		/*
+		for(int q=0;q<=path[M-1][N-1].k;q++)
+		{
+			cout<<"K: "<<q<<endl;
+			for(int w=0;w<M;w++)
+			{
+				for(int e=0;e<N;e++)
+				{
+					cout<<dp[w][e][q].weight<<" ";
+				}
+				cout<<endl;
+			}
+		}
+		*/
+		
+		/////////////////////////////////////// 
+
+		//	출력시작~~~~~~~~~~~~~~~ 
+		fout<<"Test Case No:"<<i+1<<endl;
+	//	cout<<"Test Case No:"<<i+1<<endl;
+		for(int j=0;j<=path[M-1][N-1].k;j++)
+		{	
+ 
+			if(dp[M-1][N-1][j].route !=0 && dp[M-1][N-1][j].route% 100000 !=0)//경로가없을시 보이지않는다. 
+			{					
+		//		cout<<"k:"<<j<<" count:"<<dp[M-1][N-1][j].route%100000<<" cost:"<<dp[M-1][N-1][j].weight<<endl;
+				fout<<"k:"<<j<<" count:"<<dp[M-1][N-1][j].route % 100000<<" cost:"<<dp[M-1][N-1][j].weight<<endl;
+		
+				x=0;y=0;
+
+				for(int q=0;q<dp[M-1][N-1][j].str.size();q++)
+				{		
+					fout<<"("<<x<<","<<y<<")";
+					fout<<"->";
+									
+					if(dp[M-1][N-1][j].str[q]=='R') y++;
+					else x++;
+				}
+		//		cout<<endl;
+				fout<<"("<<M-1<<","<<N-1<<")"<<endl;
+			//	fout<<endl;
+			}
+		}
+	//	cout<<endl;
+		fout<<endl;
 		
 	}
 	fin.close();

@@ -3,7 +3,7 @@ const int ledB =5;
 
 void setup() {
   pinMode(ledA,OUTPUT);
-  pinMode(ledA,OUTPUT);
+  pinMode(ledB,OUTPUT);
 
 }
 
