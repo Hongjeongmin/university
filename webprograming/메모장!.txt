@@ -1,0 +1,18 @@
+create table banktrade (
+id varchar2(20),
+tradedate varchar2(20),
+deposit number(10),
+withdraw number(10)
+);
+
+
+
+create table bankmember (
+id varchar2(20),
+name varchar2(20),
+pw varchar2(20),
+age number(3),
+phone varchar2(13),
+balance number(10),
+primary key(id)
+);

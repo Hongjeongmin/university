@@ -1,0 +1,60 @@
+예를 들어 banktrade를 아래와 같이 생성했다고 할 때,
+
+// Oracle 
+create table banktrade (
+id varchar2(10),    
+tradedate date,
+deposit number(13),
+withdraw number(13)
+);
+
+
+// MySQL
+create table banktrade (
+id varchar(10),    
+tradedate date,
+deposit int,
+withdraw int
+);
+
+
+
+(1) 내가 만든 테이블들이 뭐 있는지 알고 싶을 때 (where 조건 작은따옴표 안에 사용자 이름을 대문자로 넣어야 함) 
+
+
+Oracle --> select table_name from all_tables where owner='SCOTT';
+
+MySQL --> show tables;
+
+
+
+(2) 내가 만든 특정 테이블에 어떤 칼럼들이 있는지 알고 싶을 때 (대소문자 상관없음)
+
+
+ desc banktrade;     
+
+
+
+(3) 날짜에 실제 insert되는 시간을 넣고 싶을 때
+
+
+Oracle --> insert into banktrade values('james', sysdate, 3000, 0);      // sysdate
+
+MySQL --> insert into banktrade values('james', sysdate(), 3000, 0);    // sysdate()
+
+
+
+(4) 계속 추가하겠습니다~
+
+
+
+
+
+
+
+
+
+
+
+
+
