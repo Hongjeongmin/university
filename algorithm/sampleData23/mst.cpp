@@ -183,7 +183,17 @@ void  Kru() // mst 값 반환
 	}	
 	
 }
-
+void Report()
+{
+	int s=0;
+	while(s<size)
+	{
+		
+		cout<<heap[s].edge<<" ";
+		s++;//0   1   2   4   8   16
+	}
+	cout<<endl;
+}
 void Prim(int start)
 {
 	size = 0; // 우선순위 큐 초기화
@@ -199,13 +209,14 @@ void Prim(int start)
 	int result_s = start; 
 	S[start] = 1;
 //	V[start][q] =1;
+
+
 	for(int i=0;i<n;i++)
 	{
 		if(S[i] == 1) continue;
 		else if(W[start][i].w == 0) continue;
 		P_PUSH(W[start][i]);
 	}
-	
 	while(size>=0)
 	{
 		tmp = P_POP();
@@ -224,7 +235,8 @@ void Prim(int start)
 			
 			P_PUSH(W[start][i]);
 			//pq.push(W[start][i]);
-		}	 
+		} 
+
 	}
 	
 	fprintf(out,"Tree edges by Prim algorithm with starting vertex %d: %d\n",result_s,result);

@@ -1,19 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-	<form method="post" action="deposit_insert.jsp"><p>
-		<fieldset> 
-		<legend><b>입금 금액을 입력하세요</b></legend>
-		 입금액&nbsp; : <input type="text" name="deposit"/><p>
-		</fieldset> <br>
-		<a href="menu.jsp.jsp">취소 (메뉴)</a> &nbsp;&nbsp;&nbsp;
-		<input type="submit" value="등록">
-	</form>
+pageEncoding="UTF-8"%>
+<body style="background-color:#E0F8F7">
+<%
+String id = (String)session.getAttribute("id");
+%>
+<div align="center">
+<h2>입 금</h2>
+<hr>
+<font color="blue"><%=id%></font>님, 입금액을 적어주세요. <br>
+<hr><p>
+<form method="post" action="deposit_insert_p.jsp">
+입금: <input type="text" name="deposit"/> 원 <p>
+<input type="submit" value="입금진행"/>
+</form>
+<a href = "menu.jsp" > 메뉴로 돌아가기 </a> <p>
+</div>
 </body>
-</html>

@@ -12,9 +12,10 @@ String id = (String)session.getAttribute("id");
 <ul>
 <li><a href = "deposit.jsp">입금</a></li>
 <li><a href = "withdraw.jsp">출금</a></li>
-<li><a href = "balance.jsp">잔액조회</a></li>
+<li><a href = "balance.jsp">자액조회</a></li>
+<li><a href = "mytradelist.jsp">내 거래 내역 조회</a></li>
 <li><a href = "trnasfer.jsp">이체</a></li>
-<li><a href = "myinfo.jsp">회원정보변경</a></li>
+<li><a href = "check_pw.jsp">회원정보변경</a></li>
 <li><a href = "secede.jsp">회원탈회</a></li>
 <li><a href = "logout.jsp">logout</a></li>
 </ul>
