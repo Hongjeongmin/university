@@ -5,15 +5,15 @@ using namespace std;
 class Light
 {
 	public:
-		int l;
-		int r;
+		int left;
+		int right;
 		
 		bool operator>(Light &L) const{
-			if(this->l > L.l) return true;
+			if(this->left > L.left) return true;
 			return false;
 		}
 		bool operator<(Light &L) const{
-			if(this->l < L.l) return true;
+			if(this->left < L.left) return true;
 			return false;
 		}			
 		
@@ -23,7 +23,7 @@ int N;
 int K;
 int MAX;
 
-int How_many_count(int l,int r)
+int How_many_count(int left,int right)
 {
 	int cnt=0;
 	int locate;
@@ -35,27 +35,27 @@ int How_many_count(int l,int r)
 		locate = -1;
 		for(;w<N;w++)
 		{
-			if(light[w].l>l) break;
+			if(light[w].left>left) break;
 			
-			if(light[w].r>=l && light[w].r > big_r)
+			if(light[w].right>=left && light[w].right > big_r)
 			{
-				big_r = light[w].r;
+				big_r = light[w].right;
 				locate = w;
 			}
 		}
-		if(locate == -1|| MAX < r) return -1; 
+		if(locate == -1|| MAX < right) return -1; 
 		cnt++;
 		
-		if(r<=light[locate].r) return cnt;	
-		l = light[locate].r;
+		if(right<=light[locate].right) return cnt;	
+		left = light[locate].right;
 	}
 }
 
 int main(void)
 {
 	int cnt;
-	int l;
-	int r;
+	int left;
+	int right;
 	int result;
 	int locate;
 	int big;
@@ -69,18 +69,18 @@ int main(void)
 	MAX=0;
 	for(int i=0;i<N;i++)
 	{
-		fin>>light[i].l;
-		fin>>light[i].r;
-		if(light[i].r>MAX) MAX = MAX=light[i].r;
+		fin>>light[i].left;
+		fin>>light[i].right;
+		if(light[i].right>MAX) MAX = MAX=light[i].right;
 	} 
 	sort(light,light + N);
-//	for(int i=0;i<N;i++)cout<<light[i].l<<" "<<light[i].r<<endl;
+//	for(int i=0;i<N;i++)cout<<light[i].left<<" "<<light[i].right<<endl;
 	
 	fin>>K;
 	for(int i=1;i<=K;i++)
 	{
-		fin>>l;fin>>r;
-		result = How_many_count(l,r);
+		fin>>left;fin>>right;
+		result = How_many_count(left,right);
 
 		fout<<result<<endl;
 	//	cout<<result<<endl;	

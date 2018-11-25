@@ -18,4 +18,9 @@ String id = (String)session.getAttribute("id");
 <li><a href = "check_pw.jsp">회원정보변경</a></li>
 <li><a href = "secede.jsp">회원탈회</a></li>
 <li><a href = "logout.jsp">logout</a></li>
+<% if(id!=null) {
+if(id.equals("admin")) { %>  
+<li><a href = "alldatalist.jsp">전체 데이터(관리자용)</a>
+<% }} %>
 </ul>
+</body>

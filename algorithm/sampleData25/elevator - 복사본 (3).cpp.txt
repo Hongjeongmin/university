@@ -1,0 +1,185 @@
+#include <iostream>
+#include <fstream>
+#include <vector>
+#include <algorithm>
+#include <cmath>
+#include <stdlib.h>
+using namespace std;
+
+template<typename T>
+void swap_(T& _input1, T& _input2)
+{
+	T Temp = _input1;
+	_input1 = _input2;
+	_input2 = Temp;
+}
+
+const int INF = 10e8 + 777;
+
+ifstream fin;
+ofstream fout;
+
+class p
+{
+public:
+	int floor;
+	int down;
+	int up;
+
+	p(int floor_, int down_, int up_) : floor(floor_), down(down_), up(up_) {}
+	bool operator <(p &W);
+	bool operator >(p &W);
+};
+
+bool p::operator<(p &W)
+{
+	if (this->floor < W.floor)
+		return true;
+	else if (this->floor == W.floor && this->down > W.down)
+		return true;
+	else if (this->floor == W.floor && this->down == W.down && this->up > W.up)
+		return true;
+	else
+		return false;
+}
+
+bool p::operator>(p &W)
+{
+	if (this->floor > W.floor)
+		return true;
+	else if (this->floor == W.floor && this->down < W.down)
+		return true;
+	else if (this->floor == W.floor && this->down == W.down && this->up < W.up)
+		return true;
+	else
+		return false;
+}
+
+struct map_
+{
+	int min[10001];
+	int sum;
+	int select[201];
+};
+
+pair<int, int> best[201][201];
+vector<p> c;
+map_ map[201][201], clearr;
+
+int main()
+{
+	for (int i = 0; i < 10001; i++)
+		clearr.min[i] = INF;
+	clearr.sum = INF;
+	fin.open("elevator.inp");
+	fout.open("elevator.out");
+
+	int T, n, K; // n : 탑승객 수, k : 엘베 정지 횟수
+	int f, down, up;
+	fin >> T;
+	while (T--)
+	{
+		fin >> n >> K;
+		c.clear();
+		for (int i = 0; i < n; i++)
+		{
+			fin >> f >> down >> up;
+			c.push_back(p(f, down, up));
+		}
+		sort(c.begin(), c.end());
+		
+
+		// K가 1일 때 쌓자
+		int a, b, result = INF, idx;
+		for (int i = 2; i <= c.back().floor; i++) // 층수에 대한 루프
+		{
+			map[i][1].sum = 0;
+			for (int j = 0; j < n; j++) // 사람에 대한 루프
+			{
+				if (c[j].floor >= i) // 무조건 올라가야 한다.
+				{
+					map[i][1].min[j] = c[j].up * (c[j].floor - i);
+				}
+				else
+				{
+					a = c[j].up * (c[j].floor - 1);
+					b = c[j].down * (i - c[j].floor);
+					map[i][1].min[j] = min(a, b);
+				}
+				map[i][1].sum += map[i][1].min[j];
+			}
+			if (result > map[i][1].sum)
+			{
+				result = map[i][1].sum;
+				map[i][1].select[0] = i;
+			}
+			else
+			{
+				map[i][1].sum = result;//map[i - 1][1].sum;
+				map[i][1].select[0] = map[i - 1][1].select[0];
+			}
+		}
+		cout << "=================================" << endl;
+
+		int minValue, s1, s2;
+		int sum, temp, temp2, select;
+		for (int i = 2; i <= K; i++) // K에 대한 루프
+		{
+			minValue = INF;
+			for (int j = 2; j <= c.back().floor; j++) // K-1의 아이들을 조사하자
+			{
+				if (minValue > map[j][i - 1].sum)
+				{
+					s1 = j;
+					s2 = i - 1;
+					minValue = map[j][i - 1].sum;
+				}
+			}
+			for (int j = 2; j <= c.back().floor; j++) // F에 대한 루프
+			{
+				map[j][i].sum = 0;
+
+				for (int k = 0; k < n; k++) // 사람에 대한 루프
+				{
+					if (c[k].floor >= j) // 무조건 올라간다
+					{
+						temp = c[k].up * (c[k].floor - j);
+					}
+					else
+					{
+						a = c[k].up * (c[k].floor - 1);
+						b = c[k].down * (j - c[k].floor);
+						temp = min(a, b);
+					}
+					if (map[s1][s2].min[k] > temp)
+					{
+						map[j][i].min[k] = temp;
+					}
+					else
+					{
+						map[j][i].min[k] = map[s1][s2].min[k];
+					}
+				}
+
+				for (int k = 0; k < n; k++)
+					map[j][i].sum += map[j][i].min[k];
+
+				//if (map[j - 1][i].sum < map[j][i].sum && map[j - 1][i].sum != 0)
+				//	map[j][i].sum = map[j - 1][i].sum;
+			}
+		}
+
+
+		int min_ = INF;
+		for (int i = 2; i <= c.back().floor; i++)
+		{
+			cout << i << "층 : " << map[i][K].sum << endl;
+			if (min_ > map[i][K].sum)
+				min_ = map[i][K].sum;
+		}
+
+		fout << min_ << endl;
+	}
+
+	return 0;
+}

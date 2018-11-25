@@ -33,7 +33,7 @@ int main(void)
 	int buffer;
 	ifstream fin;
 	ofstream fout;
-	
+	int cnt;
 	fin.open("elevator.inp");
 	fout.open("elevator.out");
 	
@@ -72,15 +72,18 @@ int main(void)
 						W[m] += e[m].w[x];
 					} 	
 			}
-			if(Min_weight > W[m] ) 
+			if(Min_weight >= W[m] ) 
 			{
+				if(Min_weight == W[m]) cnt++;
+				else cnt=1;
 				Min_weight = W[m];
 				Min_weight_f = m;
-			}
+			} 
 		}
 		buffer = Min_weight_f;
 		
 		cout<<"f: "<<Min_weight_f<<endl;
+		cout<<cnt<<endl;
 		//dp 2°³ ºÎÅÍ ½×±â 
 		//if(i==2) cout<<"ddd"<<e[5].w[4]<<endl;
 		for(int j=2;j<=k;j++)
@@ -99,6 +102,8 @@ int main(void)
 				}
 				if(Min_weight > W[m] ) 
 				{
+					if(Min_weight == W[m]) cnt++;
+					else cnt=1;					
 					Min_weight = W[m];
 					Min_weight_f = m;
 				}
@@ -106,6 +111,8 @@ int main(void)
 
 			buffer = Min_weight_f;
 			cout<<"f: "<<Min_weight_f<<endl;
+			cout<<"w: "<<Min_weight<<endl;
+			cout<<cnt<<endl;
 		}
 		
 		cout<<Min_weight<<endl;
