@@ -4,6 +4,7 @@
 String url = "jdbc:oracle:thin:@localhost:1521:XE"; 
 String uid = "scott";  String pass = "tiger";  
 String sql =  "select * from bankmember where id = ?";
+String sql2 =  "update visit set count = count + 1";
 try{
 Class.forName("oracle.jdbc.driver.OracleDriver");
 Connection conn = DriverManager.getConnection(url, uid, pass);
@@ -15,6 +16,9 @@ ResultSet rs = pre.executeQuery();
 if(rs.next()) {
 session.setAttribute("id", id);
 session.setMaxInactiveInterval(60*60);  // 테스트 편의 위해 1시간
+pre = conn.prepareStatement(sql2);
+
+ResultSet rs2 = pre.executeQuery();
 response.sendRedirect("menu.jsp");
 }
 %>
